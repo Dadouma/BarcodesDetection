@@ -173,9 +173,8 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   image: {
-    width: '100%',
-    height: '100%',
-    aspectRatio: 9 / 16,
+    width: 350, // Width of the camera view
+    height: 500,
   },
   camerax:{
     width: 350, // Width of the camera view
