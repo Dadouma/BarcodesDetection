@@ -5,7 +5,8 @@ import { recognizeBarcode } from "../mlkit";
 import CameraPhoto from "./CameraPhoto";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Home(){
+export default function Home({route}){
+  const uriCamera=route.params?.uri;
   const navigation=useNavigation();
   const [uri, setUri] = useState('');
   const [response, setResponse] = useState([]);
@@ -57,11 +58,11 @@ export default function Home(){
     <ScrollView>
       <SafeAreaView>
         <View>
-          { (uri.length>0) && (
+          {/*{ (uriCamera.length>0) && (*/}
               <Image style={{aspectRatio: 1, width: '100%'}}
-                     source={{uri: uri}}
-                     resizeMode="contain"/> )
-          }
+                     source={{uri: uriCamera}}
+                     resizeMode="contain"/>
+          {/*}*/}
         </View>
         <View style={styles.buttonView}>
           <Button title="GALLERY" onPress={ImagePicker}/>

@@ -14,7 +14,7 @@ function CameraPhoto() {
   const camera = useRef(null);
   const devices = useCameraDevices();
   const device = devices.back;
-  const [uriCmaera,setUriCamera]=useState('');
+  const [uriCamera,setUriCamera]=useState('');
 
   const [showCamera, setShowCamera] = useState(true);
   const [imageSource, setImageSource] = useState('');
@@ -114,8 +114,10 @@ function CameraPhoto() {
                   borderWidth: 2,
                   borderColor: 'white',
                 }}
-                onPress={() => {setShowCamera(true);
-                navigation.navigate('Home')}}>
+                onPress={() => {
+                  setShowCamera(true)
+                navigation.navigate('Home',{uri: uriCamera})
+                }}>
                 <Text style={{color: 'white', fontWeight: '500'}}>
                   Use Photo
                 </Text>
