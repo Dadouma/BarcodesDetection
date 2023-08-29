@@ -7,11 +7,14 @@ import {
   Image,
 } from 'react-native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
+import { useNavigation } from "@react-navigation/native";
 
 function CameraPhoto() {
+  const navigation=useNavigation();
   const camera = useRef(null);
   const devices = useCameraDevices();
   const device = devices.back;
+  const [uriCmaera,setUriCamera]=useState('');
 
   const [showCamera, setShowCamera] = useState(true);
   const [imageSource, setImageSource] = useState('');
@@ -30,6 +33,7 @@ function CameraPhoto() {
       setImageSource(photo.path);
       setShowCamera(false);
       console.log(photo.path);
+      setUriCamera(`file://` + photo.path);
     }
   };
 
@@ -43,7 +47,7 @@ function CameraPhoto() {
         <>
           <Camera
             ref={camera}
-            style={StyleSheet.absoluteFill}
+            style={styles.camerax}
             device={device}
             isActive={showCamera}
             photo={true}
@@ -110,7 +114,8 @@ function CameraPhoto() {
                   borderWidth: 2,
                   borderColor: 'white',
                 }}
-                onPress={() => setShowCamera(true)}>
+                onPress={() => {setShowCamera(true);
+                navigation.navigate('Home')}}>
                 <Text style={{color: 'white', fontWeight: '500'}}>
                   Use Photo
                 </Text>
@@ -169,6 +174,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     aspectRatio: 9 / 16,
+  },
+  camerax:{
+    width: 350, // Width of the camera view
+    height: 500, // Height of the camera view
   },
 });
 

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { launchImageLibrary } from "react-native-image-picker";
-import { Button, SafeAreaView, ScrollView, View, StyleSheet,Image } from "react-native";
+import { Button, SafeAreaView, ScrollView, View, StyleSheet,Image,Text } from "react-native";
+import { recognizeBarcode } from "../mlkit";
+import CameraPhoto from "./CameraPhoto";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home(){
+  const navigation=useNavigation();
   const [uri, setUri] = useState('');
   const [response, setResponse] = useState([]);
   const [coord,setCoord]=useState([]);
@@ -64,8 +68,24 @@ export default function Home(){
           <Button title="PROCESS" onPress={processBarcode}/>
           <Button title="CAMERA" onPress={
             ()=>{setUri('');
+              navigation.navigate('CameraPhoto');
             }}/>
         </View>
+        {response.length > 0 && (
+          <View>
+            {response.map((el, index) => (
+              <Text key={index} style={{
+                color: 'green',
+                fontSize:20,
+                textAlign: 'center',
+                margin: 5,
+                borderStyle:'solid',
+                borderWidth:2,
+                padding: 2,
+              }}>{el}</Text>
+            ))}
+          </View>
+        )}
       </SafeAreaView>
     </ScrollView>
   );
