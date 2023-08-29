@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   camerax:{
     width: 350, // Width of the camera view
-    height: 500, // Height of the camera view
+    height: 600, // Height of the camera view
   },
 });
 

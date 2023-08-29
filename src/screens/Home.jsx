@@ -22,6 +22,7 @@ export default function Home({route}){
       setUriCamera(receivedData);
       setUri('');
   }, [receivedData]);
+  //////
   useEffect(() => {
     setAspectRatio(windowDimensions.width/widthImage  )
   }, [uri])
@@ -79,11 +80,12 @@ export default function Home({route}){
     <ScrollView>
       <SafeAreaView style={{flex: 1, justifyContent: 'center', flexDirection: 'column'}}>
         <View style={{aspectRatio:1 , width: windowDimensions.width}}>
+          { (uri || uriCamera) &&(
           <Image
             style={{ aspectRatio: 1, width: '100%'}}
             source={{ uri: uri.length > 0 ? uri : uriCamera }}
             resizeMode="contain"
-          />
+          />)}
           {coord.length > 0 && (
             <BarcodesRenderer response={coord} scale={aspectRatio} />
           )}
